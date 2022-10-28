@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Travel.Models
+namespace AnimalShelter.Models
 {
-    public class TravelContext : DbContext
+    public class AnimalShelterContext : DbContext
     {
-        public TravelContext(DbContextOptions<TravelContext> options)
+        public AnimalShelterContext(DbContextOptions<AnimalShelterContext> options)
             : base(options)
         {
         }

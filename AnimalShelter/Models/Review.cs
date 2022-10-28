@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-namespace Travel.Models
+namespace AnimalShelter.Models
 {
   public class Review
   {

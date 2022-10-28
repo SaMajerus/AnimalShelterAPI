@@ -4,9 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Travel.Models;
+using AnimalShelter.Models;
 
-namespace Travel
+namespace AnimalShelter
 {
     public class Startup
     {
@@ -21,7 +21,7 @@ namespace Travel
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<TravelContext>(opt =>
+            services.AddDbContext<AnimalShelterContext>(opt =>
                 opt.UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
             services.AddControllers();
         }

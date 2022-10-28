@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Travel.Models;
+using AnimalShelter.Models;
 
-namespace Travel.Controllers
+namespace AnimalShelter.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
   public class ReviewsController : ControllerBase
   {
-    private readonly TravelContext _db;
+    private readonly AnimalShelterContext _db;
 
-    public ReviewsController(TravelContext db)
+    public ReviewsController(AnimalShelterContext db)
     {
       _db = db;
     }
