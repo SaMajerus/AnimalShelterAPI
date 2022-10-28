@@ -2,13 +2,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 namespace AnimalShelter.Models
 {
-  public class Place
+  public class Animal
   {
-    public Place()
+    public Animal()
     {
       this.Reviews = new HashSet<Review>();
     }
-    public int PlaceId { get; set; }
+    public int AnimalId { get; set; }
     [Required]
     public string Name { get; set; }
     [Required]
@@ -16,6 +16,6 @@ namespace AnimalShelter.Models
     [Required]
     [Range(1, 5, ErrorMessage = "Rating must be between a 1 and 5.")]
     public int Rating { get; set; }
-    public ICollection<Review> Reviews { get; set; }
+    public ICollection<Dog> Dogs { get; set; }
   }
 }
