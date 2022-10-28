@@ -10,20 +10,20 @@ namespace AnimalShelter.Models
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-          builder.Entity<Place>()
+          builder.Entity<Dog>()
               .HasData(
-                  new Place { PlaceId = 1, Name = "Venice", Country = "Italy", Rating = 3 },
-                  new Place { PlaceId = 2, Name = "Rome", Country = "Italy", Rating = 5 },
-                  new Place { PlaceId = 3, Name = "Toronto", Country = "Canada", Rating = 2 },
-                  new Place { PlaceId = 4, Name = "Toledo", Country = "United States", Rating = 4 },
-                  new Place { PlaceId = 5, Name = "Buffalo", Country = "United States", Rating = 2 }
+                  new Dog { DogId = 1, Name = "Victoria", Country = "Italy", Rating = 3 },
+                  new Dog { DogId = 2, Name = "Zeus", Country = "Italy", Rating = 5 },
+                  new Dog { DogId = 3, Name = "Remmie", Country = "United States", Rating = 4 }
               );
-          builder.Entity<Review>()
+          builder.Entity<Cat>()
               .HasData(
-                  new Review { ReviewId = 1, UserName = "Josh", PlaceId = 1}
+                  new Cat { CatId = 1, Name = "Todd", Country = "Canada", Rating = 2 },
+                  new Cat { CatId = 2, Name = "Buffy", Country = "United States", Rating = 2 }
               );
         }
-        public DbSet<Place> Places { get; set; }
-        public DbSet<Review> Reviews { get; set; }
+        // public DbSet<Animal> Animals { get; set; }
+        public DbSet<Dog> Dogs { get; set; }
+        public DbSet<Cat> Cats { get; set; }
     }
 }
