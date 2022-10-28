@@ -22,30 +22,31 @@ namespace AnimalShelter.Controllers
       _db = db;
     }
 
-    // GET api/places/
+    // GET api/animals/
     [HttpGet]
-    public async Task<List<Animal>> Get(string country, string name, int rating)
+    public async Task<List<Animal>> Get(string name, string dogOrCat, int age)
     {
-      IQueryable<Animal> query = _db.Animals.Include(entry => entry.Reviews).AsQueryable();
+      IQueryable<Animal> query = _db.Animals.AsQueryable();
 
       if (name != null)
       {
-        query = query.Where(entry => entry.Name == name).Include(entry => entry.Reviews);
+        query = query.Where(entry => entry.Name == name);
       }
 
-      if (country != null)
+      if (dogOrCat != null)
       {
-        query = query.Where(entry => entry.Country == country).Include(entry => entry.Reviews);
+        query = query.Where(entry => entry.Type == dogOrCat);
       }
 
-      if (rating > 0)
+      if (age > 0)
       {
-        query = query.Where(entry => entry.Rating == rating).Include(entry => entry.Reviews);
+        query = query.Where(entry => entry.Age == age);
       }
 
       return await query.ToListAsync();
     }
 
+/*
     [HttpGet("random")]
     public async Task<ActionResult<IEnumerable<Animal>>> GetRandom()
     {
@@ -53,45 +54,45 @@ namespace AnimalShelter.Controllers
       int upper = _db.Animals.Count() + 1;
       Random rnd = new Random();
       int id = rnd.Next(lower, upper);
-      IQueryable<Animal> quer = _db.Animals.Include(entry => entry.Reviews).AsQueryable();
-      quer = quer.Where(entry => entry.AnimalId == id).Include(entry => entry.Reviews);
+      IQueryable<Animal> quer = _db.Animals.AsQueryable();
+      quer = quer.Where(entry => entry.AnimalId == id);
       return await quer.ToListAsync();
-    }
+    }  */ 
   
-    // GET api/places/5
+    // GET api/animals/5
     [HttpGet("{id}")]
     public async Task<ActionResult<IEnumerable<Animal>>> GetAnimal(int id)
     {
-      IQueryable<Animal> place = _db.Animals.Include(entry => entry.Reviews).AsQueryable();
-      place = place.Where(entry => entry.AnimalId == id).Include(entry => entry.Reviews);
+      IQueryable<Animal> animal = _db.Animals.AsQueryable();
+      animal = animal.Where(entry => entry.AnimalId == id);
       if (id > _db.Animals.Count())
       {
         return NotFound();
       }
-      return await place.ToListAsync();
+      return await animal.ToListAsync();
     }
 
-    // POST api/places
+    // POST api/animals
     [HttpPost]
-    public async Task<ActionResult<Animal>> Post(Animal place)
+    public async Task<ActionResult<Animal>> Post(Animal animal)
     {
-      _db.Animals.Add(place);
+      _db.Animals.Add(animal);
       await _db.SaveChangesAsync();
 
-      // return CreatedAtAction("Post", new { id = place.AnimalId }, place);
-      return CreatedAtAction(nameof(GetAnimal), new { id = place.AnimalId }, place);
+      return CreatedAtAction("Post", new { id = animal.AnimalId }, animal);
+      // return CreatedAtAction(nameof(GetAnimal), new { id = animal.AnimalId }, animal);
     }
 
     // PUT: api/Animals/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, Animal place)
+    public async Task<IActionResult> Put(int id, Animal animal)
     {
-      if (id != place.AnimalId)
+      if (id != animal.AnimalId)
       {
         return BadRequest();
       }
 
-      _db.Entry(place).State = EntityState.Modified;
+      _db.Entry(animal).State = EntityState.Modified;
 
       try
       {
@@ -115,13 +116,13 @@ namespace AnimalShelter.Controllers
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAnimal(int id)
     {
-      var place = await _db.Animals.FindAsync(id);
-      if (place == null)
+      var animal = await _db.Animals.FindAsync(id);
+      if (animal == null)
       {
         return NotFound();
       }
 
-      _db.Animals.Remove(place);
+      _db.Animals.Remove(animal);
       await _db.SaveChangesAsync();
 
       return NoContent();

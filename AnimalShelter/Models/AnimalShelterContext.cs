@@ -7,7 +7,7 @@ namespace AnimalShelter.Models
         public AnimalShelterContext(DbContextOptions<AnimalShelterContext> options)
             : base(options)
         {
-        }
+        } /*
         protected override void OnModelCreating(ModelBuilder builder)
         {
           builder.Entity<Animal>()
@@ -18,7 +18,7 @@ namespace AnimalShelter.Models
                   new Animal { AnimalId = 1, Name = "Todd", Type = "Cat", Age = 1 },
                   new Animal { AnimalId = 2, Name = "Buffy", Type = "Cat", Age = 2 }
               );
-        }
+        }  */ 
         public DbSet<Animal> Animals { get; set; } 
     }
 }
