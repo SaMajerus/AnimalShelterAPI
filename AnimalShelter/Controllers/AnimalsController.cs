@@ -13,20 +13,20 @@ namespace AnimalShelter.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class PlacesController : ControllerBase
+  public class AnimalsController : ControllerBase
   {
     private readonly AnimalShelterContext _db;
 
-    public PlacesController(AnimalShelterContext db)
+    public AnimalsController(AnimalShelterContext db)
     {
       _db = db;
     }
 
     // GET api/places/
     [HttpGet]
-    public async Task<List<Place>> Get(string country, string name, int rating)
+    public async Task<List<Animal>> Get(string country, string name, int rating)
     {
-      IQueryable<Place> query = _db.Places.Include(entry => entry.Reviews).AsQueryable();
+      IQueryable<Animal> query = _db.Animals.Include(entry => entry.Reviews).AsQueryable();
 
       if (name != null)
       {
@@ -47,24 +47,24 @@ namespace AnimalShelter.Controllers
     }
 
     [HttpGet("random")]
-    public async Task<ActionResult<IEnumerable<Place>>> GetRandom()
+    public async Task<ActionResult<IEnumerable<Animal>>> GetRandom()
     {
       int lower = 1;
-      int upper = _db.Places.Count() + 1;
+      int upper = _db.Animals.Count() + 1;
       Random rnd = new Random();
       int id = rnd.Next(lower, upper);
-      IQueryable<Place> quer = _db.Places.Include(entry => entry.Reviews).AsQueryable();
-      quer = quer.Where(entry => entry.PlaceId == id).Include(entry => entry.Reviews);
+      IQueryable<Animal> quer = _db.Animals.Include(entry => entry.Reviews).AsQueryable();
+      quer = quer.Where(entry => entry.AnimalId == id).Include(entry => entry.Reviews);
       return await quer.ToListAsync();
     }
   
     // GET api/places/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<IEnumerable<Place>>> GetPlace(int id)
+    public async Task<ActionResult<IEnumerable<Animal>>> GetAnimal(int id)
     {
-      IQueryable<Place> place = _db.Places.Include(entry => entry.Reviews).AsQueryable();
-      place = place.Where(entry => entry.PlaceId == id).Include(entry => entry.Reviews);
-      if (id > _db.Places.Count())
+      IQueryable<Animal> place = _db.Animals.Include(entry => entry.Reviews).AsQueryable();
+      place = place.Where(entry => entry.AnimalId == id).Include(entry => entry.Reviews);
+      if (id > _db.Animals.Count())
       {
         return NotFound();
       }
@@ -73,20 +73,20 @@ namespace AnimalShelter.Controllers
 
     // POST api/places
     [HttpPost]
-    public async Task<ActionResult<Place>> Post(Place place)
+    public async Task<ActionResult<Animal>> Post(Animal place)
     {
-      _db.Places.Add(place);
+      _db.Animals.Add(place);
       await _db.SaveChangesAsync();
 
-      // return CreatedAtAction("Post", new { id = place.PlaceId }, place);
-      return CreatedAtAction(nameof(GetPlace), new { id = place.PlaceId }, place);
+      // return CreatedAtAction("Post", new { id = place.AnimalId }, place);
+      return CreatedAtAction(nameof(GetAnimal), new { id = place.AnimalId }, place);
     }
 
-    // PUT: api/Places/5
+    // PUT: api/Animals/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, Place place)
+    public async Task<IActionResult> Put(int id, Animal place)
     {
-      if (id != place.PlaceId)
+      if (id != place.AnimalId)
       {
         return BadRequest();
       }
@@ -99,7 +99,7 @@ namespace AnimalShelter.Controllers
       }
       catch (DbUpdateConcurrencyException)
       {
-        if (!PlaceExists(id))
+        if (!AnimalExists(id))
         {
           return NotFound();
         }
@@ -111,25 +111,25 @@ namespace AnimalShelter.Controllers
 
       return NoContent();
     }
-    // DELETE: api/Places/5
+    // DELETE: api/Animals/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeletePlace(int id)
+    public async Task<IActionResult> DeleteAnimal(int id)
     {
-      var place = await _db.Places.FindAsync(id);
+      var place = await _db.Animals.FindAsync(id);
       if (place == null)
       {
         return NotFound();
       }
 
-      _db.Places.Remove(place);
+      _db.Animals.Remove(place);
       await _db.SaveChangesAsync();
 
       return NoContent();
     }
     
-    private bool PlaceExists(int id)
+    private bool AnimalExists(int id)
     {
-      return _db.Places.Any(e => e.PlaceId == id);
+      return _db.Animals.Any(e => e.AnimalId == id);
     }
 
     
