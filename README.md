@@ -1,8 +1,8 @@
-# Pierre's Bakery -- Sweet & Savory Treats web application
+# Animal Shelter API
 
 #### By Sam Majerus
 
-#### A web application that Pierre uses to manage his Menu of 'Sweet & Savory Treats' at his Bakery. 
+#### An OpenAPI application that allows one to Create, Read, Update and/or Delete stored information about different animals -- Dogs or Cats -- that currently reside in an Animal Shelter.  (Accessible via Swagger UI)
 <br>
 
 ## Technologies Used
@@ -20,8 +20,6 @@
 * EF Core - DB Migrations
 * Razor
 * ViewBag
-<!-- * Layout files 
-* CSHTML5  -->
 * JSON
 * Git Bash (Used in: Local Cmd-line Terminal, navigation of local directories)
 * GitHub (Remote repositories)
@@ -32,13 +30,7 @@
 
 ## Description
 
-The User is greeted with a Splash page. From here, the User can navigate to one of 4 places: a list of Treats, a list of Flavors, an Order form, or a 'Create Account or Log-In' page. Anonymous visitors have read permissions for the whole site. Only users with Accounts created have Create/Read/Update/Delete (CRUD) permissions.   
-In the works:   an Admin account is the only one with full CRUD permissions.   Thus, normal user account for customers only has CRUD permissions for Orders they submit whilst Signed In.  Anonymous visitors have Read permissions for the site, as before. <br><br>
-
-
-<!-- Resources I found to be helpful whilst developing this application-- 
-* [Configuring a Primary Key - Microsoft Learn](https://learn.microsoft.com/en-us/ef/core/modeling/keys?tabs=data-annotations#configuring-a-primary-key)
-* [Help with an 'Internal Server Error' that occurs when population of a SelectList dropdown element fails](https://stackoverflow.com/questions/26585495/there-is-no-viewdata-item-of-type-ienumerableselectlistitem-that-has-the-key) <br><br><br> -->
+Upon navigating to 'http://localhost:5000/swagger', the user is greeted with the Swagger UI. They have full Create/Read/Update/Delete (CRUD) permissions for the application's database of stored information. <br><br>
 
 
 ## Setup/Installation Requirements
@@ -55,24 +47,26 @@ In the works:   an Admin account is the only one with full CRUD permissions.   T
 
   * 4.) Open VS Code. Then, click on the page icon at the top of the left-hand toolbar. Then click 'Open Folder'. When the Windows File Explorer window appears, navigate to and select the containing folder you pinned in the previous step. Once you've selected the folder and clicked the button to open the folder in VS Code, move on to Step 5. <br>
 
-  * 5.) Open a New Terminal (shortcut is Ctrl+Shift+`). Then, in the command line, navigate to the "SweetNSavory" subdirectory by typing  'cd SweetNSavory'  then pressing ENTER.   
+  * 5.) Open a New Terminal (shortcut is Ctrl+Shift+`). Then, in the command line, navigate to the "AnimalShelter" subdirectory by typing  'cd AnimalShelter'  then pressing ENTER.   
   Next, type  'dotnet restore'  and press ENTER. This ensures that everything required to run the program is updated and ready to go.   (Your command prompt will show up again once the operation is complete; DO NOT kill the terminal or close VS Code.) <br>
   Once that's done, move on to the next Section.     (DO NOT Navigate to any other directories between now and then!!  Otherwise, the Program will not run.) <br>
 
 
 * Setting up the 'appsettings.json' file 
-Whilst viewing the 'SweetNSavory' directory  (~/SweetNSavory), enter the command 'code appsettings.json' into the terminal. Then, in the empty file that opens (and has the name 'appsettings.json'), copy/paste the following into it.  
-
-<!-- {
-  "ConnectionStrings": {
-      "DefaultConnection": "Server=localhost;Port=3306;database=sam_majerus;uid=YOUR-SQL-USERNAME;pwd=YOUR-SQL-PASSWORD;"
-  }
-} -->
+Whilst viewing the 'AnimalShelter' directory  (~/AnimalShelter), enter the command 'code appsettings.json' into the terminal. Then, in the empty file that opens (and has the name 'appsettings.json'), copy/paste the following into it.  
 
 ```json
 {
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;database=pierres_bky_sweets_n_savories;uid=YOUR-SQL-USERNAME;pwd=YOUR-SQL-PASSWORD;"
+    "DefaultConnection": "Server=localhost;Port=3306;database=animal_shelter;uid=root;pwd=epicodus;"
   }
 }
 ```
@@ -84,7 +78,7 @@ Replace 'YOUR-SQL-USERNAME' and 'YOUR-SQL-PASSWORD' with your MySQL username and
 * Setting up the Database    
   A super convenient feature of EF Core is that in order to use a MySQL database, we don't have to import an SQL file to MySQL Workbench. 
   Instead--
-    * While still viewing the 'SweetNSavory' directory, enter this command:  'dotnet ef database update'.  
+    * While still viewing the 'AnimalShelter' directory, enter this command:  'dotnet ef database update'.  
   Once the resulting process is completed by EF Core, the database is set up and ready to go. 
 <br>
 
@@ -102,7 +96,7 @@ Replace 'YOUR-SQL-USERNAME' and 'YOUR-SQL-PASSWORD' with your MySQL username and
   * 9 times out of 10, an error message will appear if you try to run the program whilst being in the wrong directory location.  
   To make sure you're in the right place, do the following-- 
     * In your Git Bash command line, enter the command  'pwd'.  The Path leading to your current Folder (a.k.a. Directory) location will be printed out.   
-    If the last 3 Directories in that Path DO NOT match the following snippet, then you're located in the wrong place. ('CONTAINER' represents your Containing Folder, which is what Contains the Program's Parent/Root folder):       ./CONTAINER/Bky_Sweets-n-Savories.Soln/SweetNSavory 
+    If the last 3 Directories in that Path DO NOT match the following snippet, then you're located in the wrong place. ('CONTAINER' represents your Containing Folder, which is what Contains the Program's Parent/Root folder):       ./CONTAINER/AnimalShelterAPI/AnimalShelter 
 
   * If you're in the Right Place:  try entering the command  'dotnet restore'.  Once its process is completed, try entering  'dotnet run' again. 
 
