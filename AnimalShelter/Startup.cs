@@ -45,7 +45,6 @@ namespace AnimalShelter
 
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFilename);
-            // c.IncludeXmlComments(xmlPath);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,8 +56,6 @@ namespace AnimalShelter
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Travel v1"));
             }
-
-            // app.UseHttpsRedirection();
 
             app.UseRouting();
 

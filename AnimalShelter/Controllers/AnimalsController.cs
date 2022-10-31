@@ -46,7 +46,6 @@ namespace AnimalShelter.Controllers
       return await query.ToListAsync();
     }
 
-/*
     [HttpGet("random")]
     public async Task<ActionResult<IEnumerable<Animal>>> GetRandom()
     {
@@ -57,7 +56,7 @@ namespace AnimalShelter.Controllers
       IQueryable<Animal> quer = _db.Animals.AsQueryable();
       quer = quer.Where(entry => entry.AnimalId == id);
       return await quer.ToListAsync();
-    }  */ 
+    } 
   
     // GET api/animals/5
     [HttpGet("{id}")]

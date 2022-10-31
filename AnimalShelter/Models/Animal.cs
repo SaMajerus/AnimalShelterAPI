@@ -4,10 +4,10 @@ namespace AnimalShelter.Models
 {
   public class Animal
   {
-    // public Animal()
-    // {
-    //   this.Reviews = new HashSet<Review>();
-    // }
+    public Animal()
+    {
+      this.Animals = new HashSet<Animal>();
+    }
     public int AnimalId { get; set; }
     [Required]
     public string Name { get; set; }
@@ -16,8 +16,7 @@ namespace AnimalShelter.Models
     [Required]
     [Range(0, 5, ErrorMessage = "Age must be between 0 and 25 years.")]
     public int Age { get; set; }
-    //[Required]
     public string Description { get; set; } 
-    // public ICollection<Dog> Dogs { get; set; }
+    public ICollection<Animal> Animals { get; set; }
   }
 }
